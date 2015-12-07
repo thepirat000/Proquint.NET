@@ -1,6 +1,10 @@
 # Proquint.NET
 Proquint generator for .NET.
 
+Please see the article on proquints: http://arXiv.org/html/0901.4016
+
+Original C version: https://github.com/dsw/proquint
+
 A Proquint is a PRO-nouncable QUINT-uplet of alternating unambiguous consonants and vowels.
 
 A 32-bit implementation is provided (so there are 2^32 different proquints), each of which is a string consisting on two quintuplet strings separated by the character '-'.
@@ -15,9 +19,6 @@ Some examples:
 | 2147483647 | *luzuz-zuzuz* |
 | ... | ... |
 | 4294967295 | *zuzuz-zuzuz* |
-
-Please see the article on proquints: http://arXiv.org/html/0901.4016
-Original C version: https://github.com/dsw/proquint
 
 To generate a random quint use the `NewQuint()` method:
 
