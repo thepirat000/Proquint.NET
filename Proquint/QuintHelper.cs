@@ -6,8 +6,10 @@ namespace Proquint
 {
     /// <summary>
     /// Proquint helper to convert to/from Proquint strings.
-    /// A Proquint is a PRO-nouncable QUINT-uplet of alternating unambiguous consonants and vowels, for example: "lusab"
-    /// A 32-bit implementation is used, giving Proquints strings of length 10 + the separator character if used.
+    /// A Proquint is a PRO-nouncable QUINT-uplet of alternating unambiguous consonants and vowels, for example: "lusab".
+    /// 
+    /// A 32-bit implementation is used, giving Proquints strings of length 10 (not including the separator character).
+    /// 
     /// Please see the article on proquints: http://arXiv.org/html/0901.4016
     /// Original C version: https://github.com/dsw/proquint
     /// </summary>
@@ -22,6 +24,10 @@ namespace Proquint
             'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'z'
         };
         /// <summary>
+        /// Unambiguos vowels
+        /// </summary>
+        private static readonly char[] Vowels = { 'a', 'i', 'o', 'u' };
+        /// <summary>
         /// Dictionary to obtain the consonant indexes in O(1)
         /// </summary>
         private readonly static Dictionary<char, uint> ConsonantIndex;
@@ -29,10 +35,6 @@ namespace Proquint
         /// Dictionary to obtain the vowel indexes in O(1)
         /// </summary>
         private readonly static Dictionary<char, uint> VowelIndex;
-        /// <summary>
-        /// Unambiguos vowels
-        /// </summary>
-        private static readonly char[] Vowels = { 'a', 'i', 'o', 'u' };
         /// <summary>
         /// Consonant mask
         /// </summary>

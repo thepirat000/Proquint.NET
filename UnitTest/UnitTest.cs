@@ -7,10 +7,10 @@ using Proquint;
 namespace UnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest
     {
         [TestMethod]
-        public void Helper1()
+        public void Proquint_IPs()
         {
             var quads = new Dictionary<string, string>
             {
@@ -27,35 +27,47 @@ namespace UnitTest
                 {"198.81.129.136", "sinid-makam"},
                 {"12.110.110.204", "budov-kuras"}
             };
-
             foreach (var q in quads)
             {
                 var i = ToInt(q.Key);
-                var s = QuintHelper.FromUint(i, '-');
-                var i2 = QuintHelper.ToUint(s, '-');
-                Assert.AreEqual(q.Value, s);
+                var qu = new Quint32(i);
+                var i2 = (uint)qu;
+                Assert.AreEqual(q.Value, qu.ToString());
                 Assert.AreEqual(i, i2);
             }
         }
 
         [TestMethod]
-        public void Helper_Random()
+        public void Proquint_int()
         {
-            var a = QuintHelper.Random();
-            var b = QuintHelper.Random();
-            Assert.AreEqual(10, a.Length);
-            Assert.AreEqual(10, b.Length);
+            var q0 = (Quint32)(int)0;
+            var qm1 = (Quint32)(int)(-1);
+            var qmin = (Quint32)int.MinValue;
+            var qmax = (Quint32)int.MaxValue;
+            Assert.AreEqual("babab-babab", q0.ToString());
+            Assert.AreEqual("zuzuz-zuzuz", qm1.ToString());
+            Assert.AreEqual("mabab-babab", qmin.ToString());
+            Assert.AreEqual("luzuz-zuzuz", qmax.ToString());
+        }
+
+        [TestMethod]
+        public void Proquint_Random()
+        {
+            var a = Quint32.NewQuint();
+            var b = Quint32.NewQuint();
+            Assert.AreEqual(11, a.ToString().Length);
+            Assert.AreEqual(11, b.ToString().Length);
             Assert.AreNotEqual(a, b);
         }
 
         [TestMethod]
         public void Quint_Test()
         {
-            var q = new Quint(123456);
+            var q = new Quint32(123456);
             uint i = (uint) q;
             string s = (string)q;
-            var q2 = new Quint(s);
-            var q3 = new Quint(123499);
+            var q2 = new Quint32(s);
+            var q3 = new Quint32(123499);
             Assert.AreEqual((uint)123456, i);
             Assert.AreEqual((uint)123456, (uint)q2);
             Assert.IsTrue(q.Equals(q2));
@@ -69,8 +81,6 @@ namespace UnitTest
 
         private uint ToInt(string addr)
         {
-            // careful of sign extension: convert to uint first;
-            // unsigned NetworkToHostOrder ought to be provided.
             return (uint)IPAddress.NetworkToHostOrder((int)IPAddress.Parse(addr).Address);
         }
     }

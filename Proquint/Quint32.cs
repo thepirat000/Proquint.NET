@@ -1,12 +1,12 @@
 ﻿namespace Proquint
 {
     /// <summary>
-    /// Represents a 32-bit proquint identifier delimited by '-'.
+    /// Represents a 32-bit proquint pair identifier delimited by '-'.
     /// Format: "CVCVC-CVCVC" being C=Consonant, V=Vowel.
     /// Please see the article on proquints: http://arXiv.org/html/0901.4016
     /// Original C version: https://github.com/dsw/proquint
     /// </summary>
-    public struct Quint
+    public struct Quint32
     {
         /// <summary>
         /// The default separator
@@ -17,27 +17,27 @@
         /// </summary>
         private readonly uint _value;
         /// <summary>
-        /// Initializes a new instance of the <see cref="Quint"/> struct.
+        /// Initializes a new instance of the <see cref="Quint32"/> struct.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Quint(uint value) : this()
+        public Quint32(uint value) : this()
         {
             _value = value;
         }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Quint"/> struct.
+        /// Initializes a new instance of the <see cref="Quint32"/> struct.
         /// </summary>
         /// <param name="quint">The quint.</param>
-        public Quint(string quint) : this()
+        public Quint32(string quint) : this()
         {
             _value = QuintHelper.ToUint(quint, Separator);
         }
         /// <summary>
-        /// Generates a new random <see cref="Quint"/>.
+        /// Generates a new random <see cref="Quint32"/>.
         /// </summary>
-        public static Quint NewQuint()
+        public static Quint32 NewQuint()
         {
-            return new Quint(QuintHelper.RandomUint());
+            return new Quint32(QuintHelper.RandomUint());
         }
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this quint.
@@ -61,9 +61,9 @@
         /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object value)
         {
-            if (value is Quint)
+            if (value is Quint32)
             {
-                return Equals((Quint)value);
+                return Equals((Quint32)value);
             }
             if (value is uint)
             {
@@ -72,11 +72,11 @@
             return base.Equals(value);
         }
         /// <summary>
-        /// Determines whether the specified <see cref="Quint" /> is equal to this instance.
+        /// Determines whether the specified <see cref="Quint32" /> is equal to this instance.
         /// </summary>
-        /// <param name="value">The <see cref="Quint" /> to compare with this instance.</param>
-        /// <returns><c>true</c> if the specified <see cref="Quint" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public bool Equals(Quint value)
+        /// <param name="value">The <see cref="Quint32" /> to compare with this instance.</param>
+        /// <returns><c>true</c> if the specified <see cref="Quint32" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        public bool Equals(Quint32 value)
         {
             return _value.Equals(value._value);
         }
@@ -92,14 +92,14 @@
         /// <summary>
         /// Implements the ==.
         /// </summary>
-        public static bool operator ==(Quint a, Quint b)
+        public static bool operator ==(Quint32 a, Quint32 b)
         {
             return a.Equals(b);
         }
         /// <summary>
         /// Implements the !=.
         /// </summary>
-        public static bool operator !=(Quint a, Quint b)
+        public static bool operator !=(Quint32 a, Quint32 b)
         {
             return !a.Equals(b);
         }
@@ -107,64 +107,82 @@
         /// <summary>
         /// Implements the &gt;=.
         /// </summary>
-        public static bool operator >=(Quint a, Quint b)
+        public static bool operator >=(Quint32 a, Quint32 b)
         {
             return a._value >= b._value;
         }
         /// <summary>
         /// Implements the &lt;=.
         /// </summary>
-        public static bool operator <=(Quint a, Quint b)
+        public static bool operator <=(Quint32 a, Quint32 b)
         {
             return a._value <= b._value;
         }
         /// <summary>
         /// Implements the &gt;.
         /// </summary>
-        public static bool operator >(Quint a, Quint b)
+        public static bool operator >(Quint32 a, Quint32 b)
         {
             return a._value > b._value;
         }
         /// <summary>
         /// Implements the &lt;.
         /// </summary>
-        public static bool operator <(Quint a, Quint b)
+        public static bool operator <(Quint32 a, Quint32 b)
         {
             return a._value < b._value;
         }
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="Quint"/>.
+        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="Quint32"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Quint(uint value)
+        public static explicit operator Quint32(uint value)
         {
-            return new Quint(value);
+            return new Quint32(value);
         }
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Quint"/> to <see cref="System.UInt32"/>.
+        /// Performs an implicit conversion from <see cref="Quint32"/> to <see cref="System.UInt32"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator uint(Quint value)
+        public static implicit operator uint(Quint32 value)
         {
             return value._value;
         }
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.String"/> to <see cref="Quint"/>.
+        /// Performs an explicit conversion from <see cref="System.Int32"/> to <see cref="Quint32"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Quint(string value)
+        public static explicit operator Quint32(int value)
         {
-            return new Quint(value);
+            return new Quint32((uint)value);
         }
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Quint"/> to <see cref="System.String"/>.
+        /// Performs an explicit conversion from <see cref="Quint32"/> to <see cref="System.Int32"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator string(Quint value)
+        public static explicit operator int(Quint32 value)
+        {
+            return (int)value._value;
+        }
+        /// <summary>
+        /// Performs an explicit conversion from <see cref="System.String"/> to <see cref="Quint32"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static explicit operator Quint32(string value)
+        {
+            return new Quint32(value);
+        }
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Quint32"/> to <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator string(Quint32 value)
         {
             return value.ToString();
         }

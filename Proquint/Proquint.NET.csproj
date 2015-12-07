@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="QuintHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quint.cs" />
+    <Compile Include="Quint32.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
