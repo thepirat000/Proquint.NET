@@ -1,8 +1,8 @@
 # Proquint.NET
 Proquint generator for .NET.
 
-Please see the article on proquints: http://arXiv.org/html/0901.4016
-Original C version: https://github.com/dsw/proquint
+Please see the article on proquints: http://arXiv.org/html/0901.4016.
+Original C version: https://github.com/dsw/proquint.
 
 A Proquint is a PRO-nouncable QUINT-uplet of alternating unambiguous consonants and vowels.
 
