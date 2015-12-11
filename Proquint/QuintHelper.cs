@@ -6,7 +6,7 @@ namespace Proquint
 {
     /// <summary>
     /// Proquint helper to convert to/from Proquint strings.
-    /// A Proquint is a PRO-nouncable QUINT-uplet of alternating unambiguous consonants and vowels, for example: "lusab".
+    /// A Proquint is a PRO-nounceable QUINT-uplet of alternating unambiguous consonants and vowels, for example: "lusab".
     /// 
     /// A 32-bit implementation is used, giving Proquints strings of length 10 (not including the separator character).
     /// 
@@ -17,14 +17,18 @@ namespace Proquint
     {
         #region Fields
         /// <summary>
-        /// Unambiguos consonants
+        /// The format for a quint (C=Consonant, V=Vowel)
+        /// </summary>
+        private const string QuintFormat = "CVCVC";
+        /// <summary>
+        /// Unambiguous consonants
         /// </summary>
         private static readonly char[] Consonants =
         {
             'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'z'
         };
         /// <summary>
-        /// Unambiguos vowels
+        /// Unambiguous vowels
         /// </summary>
         private static readonly char[] Vowels = { 'a', 'i', 'o', 'u' };
         /// <summary>
@@ -101,20 +105,23 @@ namespace Proquint
                 j >>= 30;
                 sb.Append(Vowels[j]);
             };
-            handleConsonant();
-            handleVowel();
-            handleConsonant();
-            handleVowel();
-            handleConsonant();
+            var handlers = new Dictionary<char, Action>
+            {
+                {'C', handleConsonant },
+                {'V', handleVowel }
+            };
+            foreach (var c in QuintFormat)
+            {
+                handlers[c]();
+            }
             if (sepChar.HasValue)
             {
                 sb.Append(sepChar.Value);
             }
-            handleConsonant();
-            handleVowel();
-            handleConsonant();
-            handleVowel();
-            handleConsonant();
+            foreach (var c in QuintFormat)
+            {
+                handlers[c]();
+            }
             return sb.ToString();
         }
 
@@ -130,7 +137,6 @@ namespace Proquint
                 throw new ArgumentOutOfRangeException("quint", quint, "The quint provided has an invalid format");
             }
             uint res = 0;
-            quint = quint.ToLowerInvariant();
             for (int i = 0; i < quint.Length; i++)
             {
                 var c = quint[i];
