@@ -27,9 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="images\**" />
-    <EmbeddedResource Remove="images\**" />
-    <None Remove="images\**" />
+    <None Include="..\images\icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
   <ItemGroup>
