@@ -2,7 +2,37 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
+
+    <Description>Proquint generator for .NET and .NET Core</Description>
+    <Copyright>Copyright 2020</Copyright>
+    <AssemblyName>Proquint.NET</AssemblyName>
+    <AssemblyTitle>Proquint.NET</AssemblyTitle>
+    <VersionPrefix>4.0.0</VersionPrefix>
+    <Authors>Federico Colombo</Authors>
+    <DefineConstants>$(DefineConstants);STRONG_NAME</DefineConstants>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile>Proquint.NET.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>Proquint.NET</PackageId>
+    <PackageTags>Proquint;quint-uplet;random</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/thepirat000/Proquint.NET</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RepositoryUrl>https://github.com/thepirat000/Proquint.NET</RepositoryUrl>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="images\**" />
+    <EmbeddedResource Remove="images\**" />
+    <None Remove="images\**" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Proquint.NET.snk" />
+  </ItemGroup>
 </Project>
